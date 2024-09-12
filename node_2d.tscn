@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://maj43brlewkc"]
+
+[ext_resource type="Script" path="res://tableroAjedre.gd" id="1_xhf3u"]
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xhf3u")
