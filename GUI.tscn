@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3x8sl8rtlsb6"]
+[gd_scene load_steps=3 format=3 uid="uid://d3x8sl8rtlsb6"]
 
 [ext_resource type="Script" path="res://GUI.gd" id="1_vgen4"]
+[ext_resource type="Script" path="res://Bitboard.gd" id="2_3igqs"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -52,5 +53,6 @@ offset_bottom = 180.0
 text = "Generar piezas"
 
 [node name="Bitboard" type="Node" parent="."]
+script = ExtResource("2_3igqs")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
