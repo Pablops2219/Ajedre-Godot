@@ -1,170 +1,109 @@
 extends Control
 
-@onready var casilla_escena = preload("res://casilla.tscn")
-@onready var tablero_cuadricula = $Ajedre/CuadriculaTablero
-@onready var escena_pieza = preload("res://pieza.tscn")
-@onready var tablero_ajedrez = $Ajedre
+@onready var slot_scene = preload("res://slot.tscn")
+@onready var board_grid = $Ajedre/CuadriculaTablero
+@onready var piece_scene = preload("res://piece.tscn")
+@onready var chess_board = $Ajedre
+@onready var bitboard = $Bitboard
 
-var array_cuadricula := []
-var array_piezas := []
+
+var grid_array := []
+var piece_array := []
 var icon_offset := Vector2(39,39)
 #Creo que esto guarda las posiciones iniciales de las piezas
 var fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
-var pieza_seleccionada = null
+var piece_selected = null
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	for i in range(64):
-		crear_casillas()
-	
-	var colorbit = 0
+		create_slot()
+		
+	var colorbit =0
 	for i in range(8):
 		for j in range(8):
 			if j%2 == colorbit:
-				array_cuadricula[i*8+j].set_color_fondo(Color.LIGHT_PINK)
+				grid_array[i*8+j].set_background(Color.CORNFLOWER_BLUE)
 		if colorbit==0:
 			colorbit=1
 		else: colorbit=0
 		
-	array_piezas.resize(64)
-	array_piezas.fill(0)
+	piece_array.resize(64)
+	piece_array.fill(0)
+	pass 
+
+func _process(delta: float) -> void:
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-@warning_ignore("unused_parameter")
-func _process(delta):
-	pass
-	
-	
-func crear_casillas():
-	var nueva_casilla = casilla_escena.instantiate()
-	nueva_casilla.id_casilla = array_cuadricula.size()
-	tablero_cuadricula.add_child(nueva_casilla)
-	array_cuadricula.push_back(nueva_casilla)
-	nueva_casilla.casilla_seleccionada.connect(_on_casilla_seleccionada)
+func create_slot():
+	var new_slot = slot_scene.instantiate()
+	new_slot.slot_ID = grid_array.size()
+	board_grid.add_child(new_slot)
+	grid_array.push_back(new_slot)
+	new_slot.slot_clicked.connect(_on_slot_clicked)
 
-func _on_casilla_seleccionada(casilla):
-	if not pieza_seleccionada:
+func _on_slot_clicked(slot)->void:
+	if not piece_selected:
 		return
-	mover_pieza(pieza_seleccionada, casilla.id_casilla)
-	pieza_seleccionada = null
+	move_piece(piece_selected, slot.slot_ID)
+	clear_board_filter()
+	piece_selected = null
 
-func mover_pieza(pieza, posicion):
-	if array_piezas[posicion]:
-		array_piezas[posicion].queue_free()
-		array_piezas[posicion] = 0
+func move_piece(piece, location):
+	if piece_array[location]:
+		piece_array[location].queue_free()
+		piece_array[location] = 0 
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property(pieza, "global_position", array_cuadricula[posicion].global_position + icon_offset, 0.2)
-	array_piezas[pieza.id_casilla] = 0 #delete piece from orgiinal spot
-	array_piezas[posicion] = pieza #move it to the new location
-	pieza.id_casilla = posicion
+	tween.tween_property(piece, "global_position", grid_array[location].global_position +icon_offset, 0.2)
+	piece_array[piece.slot_ID] = 0 #delete piece from orgiinal spot
+	piece_array[location] = piece #move it to the new location
+	piece.slot_ID = location
 
-func añadir_pieza(tipo_pieza, posicion) :
-	var nueva_pieza = escena_pieza.instantiate()
-	tablero_ajedrez.add_child(nueva_pieza)
-	nueva_pieza.tipo = tipo_pieza
-	nueva_pieza.cargar_icono(tipo_pieza)
-	#"global_position" es una propiedad preestablecida por Godot cojone
-	nueva_pieza.global_position = array_cuadricula[posicion].global_position + icon_offset
-	array_piezas[posicion] = nueva_pieza
-	nueva_pieza.id_casilla = posicion
-	nueva_pieza.pieza_seleccionada.connect(_on_pieza_seleccionada)
+func add_piece(piece_type, location)->void:
+	var new_piece = piece_scene.instantiate()
+	chess_board.add_child(new_piece)
+	new_piece.type = piece_type
+	new_piece.load_icon(piece_type)
+	new_piece.global_position = grid_array[location].global_position + icon_offset
+	piece_array[location] = new_piece
+	new_piece.slot_ID = location
+	new_piece.piece_selected.connect(_on_piece_selected)
 
-func set_filtro_tablero(bitmap:int):
+func set_board_filter(bitmap:int):
 	for i in range(64):
 		if bitmap & 1:
-			array_cuadricula[63-i].set_filtro(DataHandler.estado_casillas.Vacia)
+			grid_array[63-i].set_filter(DataHandler.slot_states.FREE)
 		bitmap = bitmap >> 1
 
-func _on_pieza_seleccionada(pieza):
-	if not pieza_seleccionada:
-		pieza_seleccionada = pieza
-		print("pieza_seleccionada")
-	else:
-		_on_casilla_seleccionada(array_cuadricula[pieza.id_casilla])
+func clear_board_filter():
+	for i in grid_array:
+		i.set_filter()
 
-func parse_fen(fen : String):
-	
-	var tablerostate = fen.split(" ")
-	var tablero_index := 0
-	for i in tablerostate[0]:
+func _on_piece_selected(piece):
+	if not piece_selected:
+		piece_selected = piece
+		print("piece_selected")
+	else:
+		pass
+
+
+func parse_fen(fen : String)->void:
+	var boardstate = fen.split(" ")
+	var board_index := 0
+	for i in boardstate[0]:
 		if i == "/":continue
 		if i.is_valid_int():
-			tablero_index += i.to_int()
+			board_index += i.to_int()
 		else:
-			añadir_pieza(DataHandler.fen_dict[i], tablero_index)
-			tablero_index +=1
+			add_piece(DataHandler.fen_dict[i], board_index)
+			board_index +=1
 
 func _on_button_pressed():
 	parse_fen(fen)
-	#set_filtro_tablero(1023)
 
 func _on_button_2_pressed():
-	init_bitboard(fen) 
-	set_filtro_tablero(get_black_bitboard())
-	get_white_bitboard()
-	print("?")
+	bitboard.init_bitboard(fen) 
 
-enum PieceNames { BISHOP, KING, KNIGHT, PAWN, QUEEN, ROOK }
-var fen_dict = {
-	'b': 0,
-	'k': 1,
-	'n': 2,
-	'p': 3,
-	'q': 4,
-	'r': 5
-}
-
-
-var white_pieces = [0, 0, 0, 0, 0, 0]
-var black_pieces = [0, 0, 0, 0, 0, 0]
-
-
-func clear_bitboard():
-	for i in range(white_pieces.size()):
-		white_pieces[i] = 0
-	for i in range(black_pieces.size()):
-		black_pieces[i] = 0
-
-func set_board(whites: Array, blacks: Array):
-	for i in range(whites.size()):
-		white_pieces[i] = whites[i]
-	for i in range(blacks.size()):
-		black_pieces[i] = blacks[i]
-
-func init_bitboard(fen: String):
-	clear_bitboard()
-	var fen_split = fen.split(" ")
-	for i in fen_split[0]:
-		if i == '/':
-			continue
-		if i.is_valid_int():
-			var shift_amount = int(i)
-			left_shift(shift_amount)
-			continue
-		left_shift(1)
-		if i >= 'A' and i <= 'Z':
-			white_pieces[fen_dict[i.to_lower()]] |= 1
-		else:
-			black_pieces[fen_dict[i]] |= 1
-	print("Bitboard init successfully")
-
-func get_black_bitboard() -> int:
-	var ans = 0
-	for i in black_pieces:
-		ans |= i
-	return ans
-
-func get_white_bitboard() -> int:
-	var ans = 0
-	for i in white_pieces:
-		ans |= i
-		print(ans)
-	return ans
-
-func left_shift(shift_amount: int):
-	for piece in range(black_pieces.size()):
-		black_pieces[piece] <<= shift_amount
-	for piece in range(white_pieces.size()):
-		white_pieces[piece] <<= shift_amount
+func _on_button_3_pressed():
+	set_board_filter(bitboard.get_black_bitboard())

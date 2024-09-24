@@ -1,15 +1,15 @@
 extends Node
 
 var assets := []
-enum NombresPiezas {WHITE_BISHOP, WHITE_KING, WHITE_KNIGHT, WHITE_PAWN, WHITE_QUEEN, WHITE_ROOK, BLACK_BISHOP, BLACK_KING, BLACK_KNIGHT, BLACK_PAWN, BLACK_QUEEN, BLACK_ROOK}
-var fen_dict := {	"b" = NombresPiezas.BLACK_BISHOP, "k" = NombresPiezas.BLACK_KING, 
-					"n" = NombresPiezas.BLACK_KNIGHT, "p" = NombresPiezas.BLACK_PAWN, 
-					"q" = NombresPiezas.BLACK_QUEEN, "r" = NombresPiezas.BLACK_ROOK, 
-					"B" = NombresPiezas.WHITE_BISHOP, "K" = NombresPiezas.WHITE_KING, 
-					"N" = NombresPiezas.WHITE_KNIGHT, "P" = NombresPiezas.WHITE_PAWN, 
-					"Q" = NombresPiezas.WHITE_QUEEN, "R" = NombresPiezas.WHITE_ROOK, }
+enum PieceNames {WHITE_BISHOP, WHITE_KING, WHITE_KNIGHT, WHITE_PAWN, WHITE_QUEEN, WHITE_ROOK, BLACK_BISHOP, BLACK_KING, BLACK_KNIGHT, BLACK_PAWN, BLACK_QUEEN, BLACK_ROOK}
+var fen_dict := {	"b" = PieceNames.BLACK_BISHOP, "k" = PieceNames.BLACK_KING, 
+					"n" = PieceNames.BLACK_KNIGHT, "p" = PieceNames.BLACK_PAWN, 
+					"q" = PieceNames.BLACK_QUEEN, "r" = PieceNames.BLACK_ROOK, 
+					"B" = PieceNames.WHITE_BISHOP, "K" = PieceNames.WHITE_KING, 
+					"N" = PieceNames.WHITE_KNIGHT, "P" = PieceNames.WHITE_PAWN, 
+					"Q" = PieceNames.WHITE_QUEEN, "R" = PieceNames.WHITE_ROOK, }
 
-enum estado_casillas {Vacia, Ninguno}
+enum slot_states {NONE, FREE}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

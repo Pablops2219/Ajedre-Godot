@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://dj8fe81q76b3u"]
 
-[ext_resource type="Script" path="res://casilla.gd" id="1_y5ml3"]
+[ext_resource type="Script" path="res://slot.gd" id="1_y5ml3"]
 
-[node name="Casilla" type="ColorRect"]
+[node name="Slot" type="ColorRect"]
 custom_minimum_size = Vector2(78, 78)
 offset_right = 78.0
 offset_bottom = 78.0
-color = Color(0.819608, 0.913725, 0.964706, 1)
+color = Color(0.94902, 0.717647, 1, 1)
 script = ExtResource("1_y5ml3")
 
-[node name="Filtro" type="ColorRect" parent="."]
+[node name="Filter" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,4 +18,4 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[connection signal="gui_input" from="Filtro" to="." method="_on_filtro_gui_input"]
+[connection signal="gui_input" from="Filter" to="." method="_on_filter_gui_input"]
