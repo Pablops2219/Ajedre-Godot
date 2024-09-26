@@ -9,7 +9,7 @@ var fen_dict := {	"b" = PieceNames.BLACK_BISHOP, "k" = PieceNames.BLACK_KING,
 					"N" = PieceNames.WHITE_KNIGHT, "P" = PieceNames.WHITE_PAWN, 
 					"Q" = PieceNames.WHITE_QUEEN, "R" = PieceNames.WHITE_ROOK, }
 
-enum slot_states {NONE, FREE}
+enum slot_states {NONE, FREE, CHECK}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,10 +25,3 @@ func _ready():
 	assets.append("res://art_assets/black_pawn.png")
 	assets.append("res://art_assets/black_queen.png")
 	assets.append("res://art_assets/black_rook.png")
-
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

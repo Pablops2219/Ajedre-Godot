@@ -3,8 +3,6 @@ extends Node
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
-	pass
 
 enum PieceNames { BISHOP, KING, KNIGHT, PAWN, QUEEN, ROOK }
 
@@ -59,7 +57,6 @@ func get_white_bitboard() -> int:
 	var ans = 0
 	for i in white_pieces:
 		ans |= i
-		print(ans)
 	return ans
 
 func left_shift(shift_amount: int):
@@ -67,3 +64,15 @@ func left_shift(shift_amount: int):
 		black_pieces[piece] <<= shift_amount
 	for piece in range(white_pieces.size()):
 		white_pieces[piece] <<= shift_amount
+
+func remove_piece(location: int, piece_type: int):
+	if piece_type > 5:#If the piece is black
+		black_pieces[piece_type % 6] &= ~(1 << location)
+	else:#If the piece is white
+		white_pieces[piece_type % 6] &= ~(1 << location)
+
+func add_piece(location: int, piece_type: int) -> void:
+	if piece_type > 5:#If the piece is black
+		black_pieces[piece_type % 6] |= 1 << location
+	else:#If the piece is white
+		white_pieces[piece_type % 6] |= 1 << location

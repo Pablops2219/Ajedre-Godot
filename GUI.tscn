@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3x8sl8rtlsb6"]
+[gd_scene load_steps=4 format=3 uid="uid://d3x8sl8rtlsb6"]
 
 [ext_resource type="Script" path="res://GUI.gd" id="1_vgen4"]
 [ext_resource type="Script" path="res://Bitboard.gd" id="2_3igqs"]
+[ext_resource type="Script" path="res://GeneratePath.gd" id="3_jmvty"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -46,11 +47,12 @@ columns = 8
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 901.0
-offset_top = 95.0
-offset_right = 1025.0
+offset_left = 879.0
+offset_top = 69.0
+offset_right = 1042.0
 offset_bottom = 126.0
-text = "Generar piezas"
+text = "Generar piezas e
+inicializar bitbooard"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
@@ -58,7 +60,6 @@ offset_left = 878.0
 offset_top = 133.0
 offset_right = 1041.0
 offset_bottom = 172.0
-text = "inicializar bitbooard"
 
 [node name="Button3" type="Button" parent="."]
 layout_mode = 0
@@ -72,6 +73,7 @@ text = "piezas negras"
 script = ExtResource("2_3igqs")
 
 [node name="GeneratePath" type="Node" parent="."]
+script = ExtResource("3_jmvty")
 
 [connection signal="gui_input" from="Ajedre" to="." method="_on_ajedre_gui_input"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
