@@ -1,8 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3x8sl8rtlsb6"]
+[gd_scene load_steps=13 format=3 uid="uid://d3x8sl8rtlsb6"]
 
 [ext_resource type="Script" path="res://GUI.gd" id="1_vgen4"]
 [ext_resource type="Script" path="res://Bitboard.gd" id="2_3igqs"]
 [ext_resource type="Script" path="res://GeneratePath.gd" id="3_jmvty"]
+[ext_resource type="Script" path="res://match_handler.gd" id="4_d5c7v"]
+[ext_resource type="Texture2D" uid="uid://bbcj6sk5l2th7" path="res://art_assets/Black_Turn.png" id="5_50gkj"]
+[ext_resource type="Texture2D" uid="uid://cwx8qtmcn5yy4" path="res://art_assets/White_Turn.png" id="6_ecfe7"]
+[ext_resource type="Shader" path="res://shaders/shake.gdshader" id="7_golfk"]
+[ext_resource type="Texture2D" uid="uid://b005r736f3pve" path="res://art_assets/filterimg.png" id="8_5fe3x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_juh26"]
+atlas = ExtResource("5_50gkj")
+region = Rect2(0, 0, 779, 779)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rh2ew"]
+atlas = ExtResource("6_ecfe7")
+region = Rect2(0, 0, 779, 779)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvfdb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_juh26")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rh2ew")
+}],
+"loop": true,
+"name": &"white",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v21v1"]
+shader = ExtResource("7_golfk")
+shader_parameter/frequency = 60.0
+shader_parameter/amplitude = 0.002
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -45,29 +82,22 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 8
 
-[node name="Button" type="Button" parent="."]
+[node name="InitButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 879.0
-offset_top = 69.0
+offset_top = 98.0
 offset_right = 1042.0
-offset_bottom = 126.0
+offset_bottom = 155.0
 text = "Generar piezas e
 inicializar bitbooard"
 
-[node name="Button2" type="Button" parent="."]
+[node name="TestBlackButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 878.0
-offset_top = 133.0
-offset_right = 1041.0
-offset_bottom = 172.0
-
-[node name="Button3" type="Button" parent="."]
-layout_mode = 0
-offset_left = 899.0
-offset_top = 179.0
-offset_right = 1023.0
-offset_bottom = 212.0
-text = "piezas negras"
+offset_left = 900.0
+offset_top = 165.0
+offset_right = 1024.0
+offset_bottom = 198.0
+text = "TEST1!!11!!1!"
 
 [node name="Bitboard" type="Node" parent="."]
 script = ExtResource("2_3igqs")
@@ -75,8 +105,44 @@ script = ExtResource("2_3igqs")
 [node name="GeneratePath" type="Node" parent="."]
 script = ExtResource("3_jmvty")
 
+[node name="MatchHandler" type="Node" parent="."]
+script = ExtResource("4_d5c7v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MatchHandler"]
+position = Vector2(796, 435)
+scale = Vector2(0.192234, 0.192234)
+sprite_frames = SubResource("SpriteFrames_lvfdb")
+animation = &"white"
+
+[node name="Label" type="Label" parent="MatchHandler"]
+visible = false
+offset_left = 705.0
+offset_top = 313.0
+offset_right = 889.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 32
+text = "White moves"
+
+[node name="Filtro" type="Sprite2D" parent="MatchHandler"]
+visible = false
+material = SubResource("ShaderMaterial_v21v1")
+position = Vector2(803.5, 339)
+scale = Vector2(0.195313, 0.0709877)
+texture = ExtResource("8_5fe3x")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MatchHandler"]
+offset_left = 671.0
+offset_top = 315.0
+offset_right = 936.0
+offset_bottom = 367.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]White moves[center]"
+scroll_active = false
+autowrap_mode = 0
+
 [connection signal="gui_input" from="Ajedre" to="." method="_on_ajedre_gui_input"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button2" to="Bitboard" method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="InitButton" to="." method="_on_initbutton_pressed"]
+[connection signal="pressed" from="InitButton" to="MatchHandler" method="_on_init_button_pressed"]
+[connection signal="pressed" from="TestBlackButton" to="." method="_on_testbutton_pressed"]
+[connection signal="animation_changed" from="MatchHandler/AnimatedSprite2D" to="MatchHandler" method="_on_animated_sprite_2d_animation_changed"]

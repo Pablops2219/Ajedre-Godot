@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8ymaiylx722i"
-path="res://.godot/imported/board_alt.png-149359f12a7b288bff3f5786ba95593b.ctex"
+uid="uid://3e5w3yuy6rcu"
+path="res://.godot/imported/white_queen.png-95be78e2c393a088be689d4c107e86d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/board_alt.png"
-dest_files=["res://.godot/imported/board_alt.png-149359f12a7b288bff3f5786ba95593b.ctex"]
+source_file="res://art_assets/pieces/white_queen.png"
+dest_files=["res://.godot/imported/white_queen.png-95be78e2c393a088be689d4c107e86d1.ctex"]
 
 [params]
 

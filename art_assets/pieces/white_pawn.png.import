@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnab486nhy2m8"
-path="res://.godot/imported/ajedre.png-5245305511a3bbbab2ca9db21a50b84c.ctex"
+uid="uid://cd4w62k0s0fic"
+path="res://.godot/imported/white_pawn.png-37bca7bce6449cf0b738638c6c7d340b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/ajedre.png"
-dest_files=["res://.godot/imported/ajedre.png-5245305511a3bbbab2ca9db21a50b84c.ctex"]
+source_file="res://art_assets/pieces/white_pawn.png"
+dest_files=["res://.godot/imported/white_pawn.png-37bca7bce6449cf0b738638c6c7d340b.ctex"]
 
 [params]
 

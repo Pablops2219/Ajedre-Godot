@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br7kvjeetoipb"
-path="res://.godot/imported/black_rook.png-ff58da3cef47ad9ac31ded6565836995.ctex"
+uid="uid://bskkd27ej5b3w"
+path="res://.godot/imported/text.png-f31825847b01e0830df2605e099ad87c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/black_rook.png"
-dest_files=["res://.godot/imported/black_rook.png-ff58da3cef47ad9ac31ded6565836995.ctex"]
+source_file="res://art_assets/pieces/text.png"
+dest_files=["res://.godot/imported/text.png-f31825847b01e0830df2605e099ad87c.ctex"]
 
 [params]
 

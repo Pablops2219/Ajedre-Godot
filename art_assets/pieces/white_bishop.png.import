@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs2gerq2s2dil"
-path="res://.godot/imported/white_rook.png-c827499158aca7bad504e91ed755e042.ctex"
+uid="uid://dmg5d7tv5jhgy"
+path="res://.godot/imported/white_bishop.png-a860928db9df1a71643f7de06e2c0af8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/white_rook.png"
-dest_files=["res://.godot/imported/white_rook.png-c827499158aca7bad504e91ed755e042.ctex"]
+source_file="res://art_assets/pieces/white_bishop.png"
+dest_files=["res://.godot/imported/white_bishop.png-a860928db9df1a71643f7de06e2c0af8.ctex"]
 
 [params]
 

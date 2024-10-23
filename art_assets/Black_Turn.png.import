@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd4w62k0s0fic"
-path="res://.godot/imported/white_pawn.png-da8911bb77ca4b181e626de4ae24006f.ctex"
+uid="uid://bbcj6sk5l2th7"
+path="res://.godot/imported/Black_Turn.png-d120cbb992638e07240e93db52d33780.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/white_pawn.png"
-dest_files=["res://.godot/imported/white_pawn.png-da8911bb77ca4b181e626de4ae24006f.ctex"]
+source_file="res://art_assets/Black_Turn.png"
+dest_files=["res://.godot/imported/Black_Turn.png-d120cbb992638e07240e93db52d33780.ctex"]
 
 [params]
 

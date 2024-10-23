@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bawqawdxsoi35"
-path="res://.godot/imported/sprites.png-8899494518292164fa9c1af72cf75b2c.ctex"
+uid="uid://cnab486nhy2m8"
+path="res://.godot/imported/ajedre.png-5689c730d3b304b0db8c84e255a68853.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/sprites.png"
-dest_files=["res://.godot/imported/sprites.png-8899494518292164fa9c1af72cf75b2c.ctex"]
+source_file="res://art_assets/pieces/ajedre.png"
+dest_files=["res://.godot/imported/ajedre.png-5689c730d3b304b0db8c84e255a68853.ctex"]
 
 [params]
 

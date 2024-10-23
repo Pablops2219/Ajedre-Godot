@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbiim7ii6in20"]
+
+[ext_resource type="Script" path="res://state_machine/match_handler.gd" id="1_y6jto"]
+[ext_resource type="PackedScene" uid="uid://eu3welasby2l" path="res://state_machine/state_machine.tscn" id="1_yfkko"]
+[ext_resource type="Script" path="res://state_machine/states/out_of_match.gd" id="3_b144u"]
+[ext_resource type="Script" path="res://state_machine/states/black_turn.gd" id="4_i6y1u"]
+[ext_resource type="Script" path="res://state_machine/states/white_turn.gd" id="5_sjkuy"]
+
+[node name="MatchHandler" type="Node"]
+script = ExtResource("1_y6jto")
+
+[node name="state_machine" parent="." instance=ExtResource("1_yfkko")]
+
+[node name="out_of_match" type="Node" parent="state_machine"]
+script = ExtResource("3_b144u")
+animation_name = null
+move_speed = null
+
+[node name="black_turn" type="Node" parent="state_machine"]
+script = ExtResource("4_i6y1u")
+
+[node name="white_turn" type="Node" parent="state_machine"]
+script = ExtResource("5_sjkuy")

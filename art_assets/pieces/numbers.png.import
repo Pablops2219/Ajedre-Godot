@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw73lqe14h2iv"
-path="res://.godot/imported/white_king.png-e1be115c88faef5fb5ad71df7da366a0.ctex"
+uid="uid://bs0tni751kbl1"
+path="res://.godot/imported/numbers.png-b0dca2b1e9789f73deefde22c80d719e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art_assets/white_king.png"
-dest_files=["res://.godot/imported/white_king.png-e1be115c88faef5fb5ad71df7da366a0.ctex"]
+source_file="res://art_assets/pieces/numbers.png"
+dest_files=["res://.godot/imported/numbers.png-b0dca2b1e9789f73deefde22c80d719e.ctex"]
 
 [params]
 
