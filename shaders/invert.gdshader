@@ -7,4 +7,3 @@ void fragment() {
 	new_color = vec3(1.0) - new_color;
 	COLOR.rgb = new_color;
 }
-

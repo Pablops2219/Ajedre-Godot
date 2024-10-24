@@ -82,22 +82,21 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 8
 
-[node name="InitButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 879.0
-offset_top = 98.0
-offset_right = 1042.0
-offset_bottom = 155.0
-text = "Generar piezas e
-inicializar bitbooard"
-
 [node name="TestBlackButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 900.0
-offset_top = 165.0
-offset_right = 1024.0
-offset_bottom = 198.0
+offset_left = 981.0
+offset_top = 85.0
+offset_right = 1105.0
+offset_bottom = 118.0
 text = "TEST1!!11!!1!"
+
+[node name="Debug" type="Button" parent="."]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 124.0
+offset_right = 1129.0
+offset_bottom = 162.0
+text = "Enable debug mode"
 
 [node name="Bitboard" type="Node" parent="."]
 script = ExtResource("2_3igqs")
@@ -109,7 +108,7 @@ script = ExtResource("3_jmvty")
 script = ExtResource("4_d5c7v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MatchHandler"]
-position = Vector2(796, 435)
+position = Vector2(769, 132)
 scale = Vector2(0.192234, 0.192234)
 sprite_frames = SubResource("SpriteFrames_lvfdb")
 animation = &"white"
@@ -131,10 +130,10 @@ scale = Vector2(0.195313, 0.0709877)
 texture = ExtResource("8_5fe3x")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MatchHandler"]
-offset_left = 671.0
-offset_top = 315.0
-offset_right = 936.0
-offset_bottom = 367.0
+offset_left = 649.0
+offset_top = 3.0
+offset_right = 914.0
+offset_bottom = 55.0
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]White moves[center]"
@@ -142,7 +141,6 @@ scroll_active = false
 autowrap_mode = 0
 
 [connection signal="gui_input" from="Ajedre" to="." method="_on_ajedre_gui_input"]
-[connection signal="pressed" from="InitButton" to="." method="_on_initbutton_pressed"]
-[connection signal="pressed" from="InitButton" to="MatchHandler" method="_on_init_button_pressed"]
 [connection signal="pressed" from="TestBlackButton" to="." method="_on_testbutton_pressed"]
+[connection signal="pressed" from="Debug" to="MatchHandler" method="_on_debug_pressed"]
 [connection signal="animation_changed" from="MatchHandler/AnimatedSprite2D" to="MatchHandler" method="_on_animated_sprite_2d_animation_changed"]

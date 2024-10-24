@@ -1,13 +1,22 @@
 extends Node
 
 var is_playing: bool = false
+@export var is_playing_debug: bool = false
 var white_moves: bool = true  # Variable privada o protegida
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var label = $RichTextLabel
 
 
 
-
+func can_move(is_piece_white: bool):
+	if is_playing_debug:
+		return true
+	if is_piece_white && white_moves:
+		return true
+	elif !is_piece_white && !white_moves:
+		return true
+	else: 
+		return false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,9 +47,23 @@ func _on_init_button_pressed():
 
 func shake_and_display_text(color: String):
 	animated_sprite_2d.play(color)
-	label.add_theme_color_override("font_color", Color(1, 1, 1))
-	label.set_text("[center][shake rate=50.0 level=30 connected=1]" + color.capitalize() + "moves[/shake]")
+	
+	var message: String = color.capitalize() + " moves"
+	var message_with_effects: String = "[center][shake rate=50.0 level=30 connected=1]" + message + "[/shake][/center]"
+	if !white_moves:
+		message_with_effects = message_with_effects.insert(8,"[color=#000000]")
+		message_with_effects = message_with_effects.insert(message_with_effects.length()-9,"[/color]")
+		message = message.insert(0,"[color=#000000]")
+		message = message.insert(message.length(),"[/color]")
+	label.set_text(message_with_effects)
 	await get_tree().create_timer(0.2).timeout
-	label.set_text("[center]" + color.capitalize() + " moves")
+	label.set_text("[center]" + message + "[center]")
 		
 	pass
+
+
+func _on_debug_pressed():
+	if is_playing_debug:
+		is_playing_debug = false
+	else:
+		is_playing_debug = true

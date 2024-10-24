@@ -18,7 +18,6 @@ var piece_selected = null
 var gamestart := false
 
 func _process(delta):
-	#print(match_handler.is_playing)
 	if Input.is_action_just_pressed("mouse_right") and piece_selected:
 		piece_selected = null
 		clear_board_filter()
@@ -39,16 +38,17 @@ func _ready() -> void:
 		
 	piece_array.resize(64)
 	piece_array.fill(0)
-	pass 
+	
+	await get_tree().process_frame
+	init_match()
+
 
 func _on_slot_clicked(slot)->void:
-	if not piece_selected || !match_handler.is_playing:
-		return
 	if slot.state != DataHandler.slot_states.FREE:
 		clear_board_filter()
 		piece_selected = null
 		return
-	if(match_handler.get_white_moves() != is_piece_white(piece_selected)):
+	if(!match_handler.can_move(is_piece_white(piece_selected))):
 		return
 	move_piece(piece_selected, slot.slot_ID)
 	match_handler.next_turn()
@@ -173,14 +173,17 @@ func parse_fen(fen : String)->void:
 			add_piece(DataHandler.fen_dict[i], board_index)
 			board_index +=1
 
-func _on_initbutton_pressed():
+func init_match():
 	if(match_handler.is_playing):
 		print("Match already in progress!!!")
 		return
 	parse_fen(fen)
-	bitboard.init_bitboard(fen) 
+	bitboard.init_bitboard(fen)
+	match_handler.is_playing = true 
+
+func _on_initbutton_pressed():
+	init_match()
 
 
 func _on_testbutton_pressed():
-	match_handler.is_playing = false
 	set_board_filter(bitboard.get_black_bitboard())
