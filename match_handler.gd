@@ -47,8 +47,11 @@ func _on_init_button_pressed():
 
 func shake_and_display_text(color: String):
 	animated_sprite_2d.play(color)
-	
-	var message: String = color.capitalize() + " moves"
+	var message: String = ""
+	if color == "white":
+		message = "𝓦𝓱𝓲𝓽𝓮 𝓶𝓸𝓿𝓮𝓼"
+	if color == "black":
+		message = "𝓑𝓵𝓪𝓬𝓴 𝓶𝓸𝓿𝓮𝓼 "
 	var message_with_effects: String = "[center][shake rate=50.0 level=30 connected=1]" + message + "[/shake][/center]"
 	if !white_moves:
 		message_with_effects = message_with_effects.insert(8,"[color=#000000]")
