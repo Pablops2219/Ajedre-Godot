@@ -1,8 +1,8 @@
 extends Control
 
-@onready var slot_scene = preload("res://slot.tscn")
+@onready var slot_scene = preload("res://scenes/slot.tscn")
 @onready var board_grid = $Ajedre/CuadriculaTablero
-@onready var piece_scene = preload("res://piece.tscn")
+@onready var piece_scene = preload("res://scenes/piece.tscn")
 @onready var chess_board = $Ajedre
 @onready var bitboard = $Bitboard
 @onready var generate_path = $GeneratePath
@@ -65,7 +65,7 @@ func get_piece_type(piece):
 	return piece.type
 
 func _on_piece_selected(piece):
-	piece._to_string()
+	print(piece.print_relevant_info())
 	if !match_handler.is_playing:
 		return
 	if piece_selected:

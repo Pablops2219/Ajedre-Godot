@@ -1,13 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://dj8fe81q76b3u"]
 
-[ext_resource type="Script" path="res://slot.gd" id="1_y5ml3"]
+[ext_resource type="Script" path="res://scripts/slot.gd" id="1_d66sn"]
 
 [node name="Slot" type="ColorRect"]
 custom_minimum_size = Vector2(78, 78)
 offset_right = 78.0
 offset_bottom = 78.0
 color = Color(0.94902, 0.717647, 1, 1)
-script = ExtResource("1_y5ml3")
+script = ExtResource("1_d66sn")
 
 [node name="Filter" type="ColorRect" parent="."]
 layout_mode = 1

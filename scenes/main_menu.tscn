@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://btujbn24bcb6n"]
 
-[ext_resource type="Script" path="res://main_menu.gd" id="1_dpi64"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_dpi64"]
 [ext_resource type="Texture2D" uid="uid://cfvtbty4ygtba" path="res://art_assets/freaky.png" id="1_iutqi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cx3fi"]

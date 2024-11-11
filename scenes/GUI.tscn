@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3x8sl8rtlsb6"]
+[gd_scene load_steps=15 format=3 uid="uid://d3x8sl8rtlsb6"]
 
-[ext_resource type="Script" path="res://GUI.gd" id="1_vgen4"]
-[ext_resource type="Script" path="res://Bitboard.gd" id="2_3igqs"]
-[ext_resource type="Script" path="res://GeneratePath.gd" id="3_jmvty"]
-[ext_resource type="Script" path="res://match_handler.gd" id="4_d5c7v"]
+[ext_resource type="Script" path="res://scripts/GUI.gd" id="1_vgen4"]
+[ext_resource type="Script" path="res://scripts/Bitboard.gd" id="2_3igqs"]
+[ext_resource type="Script" path="res://scripts/GeneratePath.gd" id="3_jmvty"]
+[ext_resource type="Script" path="res://scripts/match_handler.gd" id="4_d5c7v"]
 [ext_resource type="Texture2D" uid="uid://bbcj6sk5l2th7" path="res://art_assets/Black_Turn.png" id="5_50gkj"]
 [ext_resource type="Texture2D" uid="uid://cwx8qtmcn5yy4" path="res://art_assets/White_Turn.png" id="6_ecfe7"]
 [ext_resource type="Shader" path="res://shaders/shake.gdshader" id="7_golfk"]
 [ext_resource type="Texture2D" uid="uid://b005r736f3pve" path="res://art_assets/filterimg.png" id="8_5fe3x"]
+[ext_resource type="PackedScene" uid="uid://b7ptbhrb6b45y" path="res://scenes/card_handler.tscn" id="9_a8b8e"]
+[ext_resource type="PackedScene" uid="uid://dm2u6bb6344ok" path="res://scenes/carta.tscn" id="10_agwub"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_juh26"]
 atlas = ExtResource("5_50gkj")
@@ -46,18 +48,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -502.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vgen4")
-
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.53185, 0.595023, 0.684256, 1)
 
 [node name="Ajedre" type="ColorRect" parent="."]
 layout_mode = 0
@@ -139,6 +133,11 @@ bbcode_enabled = true
 text = "[center]𝓦𝓱𝓲𝓽𝓮 𝓶𝓸𝓿𝓮𝓼[center]"
 scroll_active = false
 autowrap_mode = 0
+
+[node name="CardHandler" parent="." instance=ExtResource("9_a8b8e")]
+position = Vector2(200, 68)
+
+[node name="Carta" parent="CardHandler" instance=ExtResource("10_agwub")]
 
 [connection signal="gui_input" from="Ajedre" to="." method="_on_ajedre_gui_input"]
 [connection signal="pressed" from="TestBlackButton" to="." method="_on_testbutton_pressed"]
