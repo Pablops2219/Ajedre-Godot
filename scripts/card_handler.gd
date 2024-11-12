@@ -1,5 +1,6 @@
 extends Node2D
-
+const CIRCULO = preload("res://circulo.png")
+const TIME_STOP = preload("res://scenes/time_stop.tscn")
 var COLLISION_MASK_CARD = 1
 var initial_card_pos_y
 # Called when the node enters the scene tree for the first time.
@@ -10,7 +11,12 @@ func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			#print("Left click")
-			if raycast_check_for_card() != null :print(raycast_check_for_card())
+			if raycast_check_for_card() != null :
+				print(raycast_check_for_card())
+				var instance = TIME_STOP.instantiate()
+				get_parent().add_child(instance)
+				await get_parent().get_tree().create_timer(1.0).timeout
+				get_parent().get_tree().paused = true
 		else:
 			#print("Left click released")
 			pass
