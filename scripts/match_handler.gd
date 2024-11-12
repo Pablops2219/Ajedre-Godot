@@ -5,10 +5,12 @@ var is_playing: bool = false
 var white_moves: bool = true  # Variable privada o protegida
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var label = $RichTextLabel
+@onready var gui: Control = self.get_parent()
 
 
 
-func can_move(is_piece_white: bool):
+func can_move(piece):
+	var is_piece_white:bool =gui.is_piece_white(piece)
 	if is_playing_debug:
 		return true
 	if is_piece_white && white_moves:
@@ -30,7 +32,7 @@ func _process(delta):
 	pass
 
 # Getter para white_moves
-func get_white_moves() -> bool:
+func white_moves_next() -> bool:
 	return white_moves
 
 func next_turn():

@@ -48,7 +48,7 @@ func _on_slot_clicked(slot)->void:
 		clear_board_filter()
 		piece_selected = null
 		return
-	if(!match_handler.can_move(is_piece_white(piece_selected))):
+	if(!match_handler.can_move(piece_selected)):
 		return
 	move_piece(piece_selected, slot.slot_ID)
 	match_handler.next_turn()
@@ -65,7 +65,9 @@ func get_piece_type(piece):
 	return piece.type
 
 func _on_piece_selected(piece):
+	
 	print(piece.print_relevant_info())
+	#piece.get_piece_node().queue_free()
 	if !match_handler.is_playing:
 		return
 	if piece_selected:
