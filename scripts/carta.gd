@@ -3,13 +3,23 @@ extends Node2D
 
 signal hovered
 signal hovered_off
+var card_type = 0
+
+
+var card_dictionary = {
+	0: "time_stop",
+	1: "xd"
+	
+}
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#All cards must be a child of CardManager or this will throw an error
 	get_parent().connect_card_signals(self)
 	
-
+func get_card_type():
+	return card_type
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
