@@ -18,6 +18,8 @@ func _input(event):
 			#print("Left click")
 			if raycast_check_for_card() != null :
 				print(str(raycast_check_for_card()) + " Tipo: " + card_dictionary[raycast_check_for_card().get_card_type()])
+				var instance = TIME_STOP.instantiate()
+				add_child(instance)  # Agrega la instancia al árbol
 				#await get_parent().get_tree().create_timer(1.0).timeout
 				#get_parent().get_tree().paused = true
 		else:
