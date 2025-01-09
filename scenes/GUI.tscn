@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3x8sl8rtlsb6"]
+[gd_scene load_steps=16 format=3 uid="uid://d3x8sl8rtlsb6"]
 
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="1_vgen4"]
 [ext_resource type="Script" path="res://scripts/Bitboard.gd" id="2_3igqs"]
@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cwx8qtmcn5yy4" path="res://art_assets/White_Turn.png" id="6_ecfe7"]
 [ext_resource type="Shader" path="res://shaders/shake.gdshader" id="7_golfk"]
 [ext_resource type="Texture2D" uid="uid://b005r736f3pve" path="res://art_assets/filterimg.png" id="8_5fe3x"]
-[ext_resource type="PackedScene" uid="uid://b7ptbhrb6b45y" path="res://scenes/card_handler.tscn" id="9_a8b8e"]
-[ext_resource type="PackedScene" uid="uid://dm2u6bb6344ok" path="res://scenes/carta.tscn" id="10_agwub"]
+[ext_resource type="PackedScene" uid="uid://02v3ntbo01bh" path="res://scenes/CardUI.tscn" id="9_jndj1"]
+[ext_resource type="Script" path="res://scenes/hand.gd" id="9_m3tfj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_juh26"]
 atlas = ExtResource("5_50gkj")
@@ -43,12 +43,15 @@ shader = ExtResource("7_golfk")
 shader_parameter/frequency = 60.0
 shader_parameter/amplitude = 0.002
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pp8x"]
+size = Vector2(648, 291)
+
 [node name="GUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -502.0
+offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vgen4")
@@ -134,10 +137,39 @@ text = "[center]𝓦𝓱𝓲𝓽𝓮 𝓶𝓸𝓿𝓮𝓼[center]"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="CardHandler" parent="." instance=ExtResource("9_a8b8e")]
-position = Vector2(200, 68)
+[node name="CardDropArea" type="Area2D" parent="."]
 
-[node name="Carta" parent="CardHandler" instance=ExtResource("10_agwub")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
+position = Vector2(325, 146.5)
+shape = SubResource("RectangleShape2D_0pp8x")
+
+[node name="BattleUI" type="CanvasLayer" parent="." groups=["ui_layer"]]
+
+[node name="Hand" type="HBoxContainer" parent="BattleUI"]
+custom_minimum_size = Vector2(10, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -455.0
+offset_top = -329.0
+offset_right = -120.0
+offset_bottom = -239.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+script = ExtResource("9_m3tfj")
+
+[node name="CardUI" parent="BattleUI/Hand" instance=ExtResource("9_jndj1")]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="CardUI2" parent="BattleUI/Hand" instance=ExtResource("9_jndj1")]
+layout_mode = 2
+
+[node name="CardUI3" parent="BattleUI/Hand" instance=ExtResource("9_jndj1")]
+layout_mode = 2
 
 [connection signal="gui_input" from="Ajedre" to="." method="_on_ajedre_gui_input"]
 [connection signal="pressed" from="TestBlackButton" to="." method="_on_testbutton_pressed"]

@@ -14,14 +14,17 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		#EVENTOS AL CLICAR UNA CARTA
+		#if event.is
 		if event.is_pressed():
-			#print("Left click")
 			if raycast_check_for_card() != null :
-				print(str(raycast_check_for_card()) + " Tipo: " + card_dictionary[raycast_check_for_card().get_card_type()])
+				var carta = raycast_check_for_card()
+				print(str(carta) + " Tipo: " + card_dictionary[carta.get_card_type()])
 				var instance = TIME_STOP.instantiate()
-				add_child(instance)  # Agrega la instancia al árbol
+				add_child(instance)
 				#await get_parent().get_tree().create_timer(1.0).timeout
 				#get_parent().get_tree().paused = true
+			
 		else:
 			#print("Left click released")
 			pass
@@ -31,9 +34,9 @@ func connect_card_signals(card):
 	card.connect("hovered_off", on_hovered_off_card)
 	initial_card_pos_y = card.get_child(0).position.y
 
+
 func on_hovered_over_card(card):
 	highlight_card(card,true)
-
 
 func on_hovered_off_card(card):
 	highlight_card(card,false)
